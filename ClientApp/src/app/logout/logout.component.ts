@@ -1,0 +1,24 @@
+import { Component, OnInit } from '@angular/core';
+import { Adal6Service } from 'adal-angular6';
+
+@Component({
+    selector: 'app-logout',
+    templateUrl: './logout.component.html',
+    styleUrls: ['./logout.component.css']
+})
+export class LogoutComponent implements OnInit {
+
+    isAuthenticated = false;
+
+    constructor(
+        private adalService: Adal6Service
+    ) {
+      this.isAuthenticated = this.adalService.userInfo.authenticated;
+    }
+
+    ngOnInit() {
+        if (this.isAuthenticated) {
+          this.adalService.logOut();
+        }
+    }
+}
